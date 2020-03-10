@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>画板</title>
+</head>
+
+<body>
+    <!-- canvas 是inline元素，在CSS中指定宽高无效，需要d:b后设置宽高 -->
+    <canvas id="canvas" width="100" height="100"></canvas>
+
+    <script>
+        let canvas = document.getElementById('canvas');
+
+        let ctx = canvas.getContext('2d');
+        canvas.width = document.documentElement.clientWidth
+        canvas.height = document.documentElement.clientHeight
+        ctx.fillStyle = "black";
+        ctx.strokeStyle = "none";
+        ctx.lineWidth = "20";
+        ctx.lineCap = "round";
+
+
+
+
+
+        function drawLine(x1, y1, x2, y2) {
+
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.closePath();
+            ctx.stroke();
+            console.log('11111')
+        }
+
+        let painting = false
+        // 声明一个last变量
+        let last
+
+        //  抄'ontouchstart'手误'onTouchstart',console.log('111')调试后修正
+        var isTouchDevice = 'ontouchstart' in
+            document.documentElement;
+        if (isTouchDevice) {
+            canvas.ontouchmove = (e) => {
+                let x = e.touches[0].clientX
+                let y = e.touches[0].clientY
+                // console.log(x, y)
+                ctx.beginPath();
+                ctx.arc(x, y, 1, 0, 2 * Math.PI);
+                ctx.stroke();
+                ctx.fill();
+            }
+        } else {
+            canvas.onmousedown = (e) => {
+                painting = true
+                // 关键代码1,第一个点
+                last = [e.clientX, e.clientY]
+            }
+            canvas.onmousemove = (e) => {
+                if (painting === true) {
+                    console.log('111')
+                    ctx.beginPath();
+                    ctx.arc(e.clientX, e.clientY, 1, 0, 2 * Math.PI);
+                    ctx.stroke();
+                    ctx.fill();
+                    // 关键代码2，
+                    drawLine(last[0], last[1], e.clientX, e.clientY)
+                    // 关键代码3
+                    last = [e.clientX, e.clientY]
+                }
+
+            }
+
+        }
+        canvas.onmouseup = () => {
+            painting = false
+        }
+    </script>
+</body>
+
+</html>
