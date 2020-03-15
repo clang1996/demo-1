@@ -8,6 +8,9 @@ let string = `/*你好，我是一名前端新人浪浪
     border: 1px solid red;
     width: 200px;
     height: 200px;
+    pos: absolute;
+    left: 35%;
+    top: 0;
 }
 /*我要把它变成太极图
  *先把div变成圆
@@ -15,7 +18,7 @@ let string = `/*你好，我是一名前端新人浪浪
  #fuck{
     border-radius: 50%;
     box-shadow:0 0 5px rgba(0,0,0,0.5);
-    border:none;
+    border:none; 
  }
  /*然后画出阴阳两极*/
  #fuck{
@@ -80,6 +83,6 @@ let step = () => {
             n += 1;
             step();
         }            
-    }, 50);
+    }, 0);
 };
 step();
