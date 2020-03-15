@@ -1,0 +1,39 @@
+*{margin: 0; padding: 0; box-sizing: border-box;}
+#fuck{
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+#fuck::before{           
+    content: '';
+    display: block;
+    position: absolute;
+}
+#fuck::after{
+    content: '';
+    display: block;           
+    position: absolute;
+}
+#demo {
+    word-break: break-all;
+}
+
+@media (max-width: 500px) {
+#demo {
+height: 70vh;
+overflow: auto;
+}
+
+#divWrapper {
+height: 30vh;
+}
+
+#fuck {
+position: relative;
+top: 0;
+right: 0;
+}
+}
+
+
+/*# sourceMappingURL=/style.e308ff8e.css.map */
